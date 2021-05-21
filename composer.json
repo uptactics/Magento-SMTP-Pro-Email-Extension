@@ -12,6 +12,7 @@
       "name": "aschroder"
     }
   ],
+  "vsersion": "2.1.0",
   "repositories": [
     {
       "type": "vcs",
