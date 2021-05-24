@@ -25,7 +25,14 @@ class App_Mail_Transport_SendGridAPI extends Zend_Mail_Transport_Abstract
             $email->addTo($recipient);
         }
 
-        $email->setFrom($this->_mail->getFrom());
+        $headers = $this->_mail->getHeaders();
+        $fromName = explode('<',array_shift($headers['From']));
+        $fromNameValue = null;
+        if(is_array($fromName)) {
+            $fromNameValue = array_shift($fromName);
+        }
+        if(empty($fromNameValue)) $fromNameValue = null;
+        $email->setFrom($this->_mail->getFrom(), trim($fromNameValue));
         $email->setSubject($this->_mail->getSubject());
 
         if (($text = $this->_mail->getBodyText()) && $text->getRawContent()) {
