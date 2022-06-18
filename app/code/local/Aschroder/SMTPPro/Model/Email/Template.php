@@ -22,7 +22,7 @@ class Aschroder_SMTPPro_Model_Email_Template extends Mage_Core_Model_Email_Templ
      * @param   array              $variables    template variables
      * @return  boolean
      **/
-    public function send($email, $name = null, array $variables = array())
+    public function send(array|string $email, $name = null, array $variables = array())
     {
 
         $_helper = Mage::helper('smtppro');
@@ -58,17 +58,11 @@ class Aschroder_SMTPPro_Model_Email_Template extends Mage_Core_Model_Email_Templ
         $subject = $this->getProcessedTemplateSubject($variables);
 
         $setReturnPath = Mage::getStoreConfig(self::XML_PATH_SENDING_SET_RETURN_PATH);
-        switch ($setReturnPath) {
-            case 1:
-                $returnPathEmail = $this->getSenderEmail();
-                break;
-            case 2:
-                $returnPathEmail = Mage::getStoreConfig(self::XML_PATH_SENDING_RETURN_PATH_EMAIL);
-                break;
-            default:
-                $returnPathEmail = null;
-                break;
-        }
+        $returnPathEmail = match ($setReturnPath) {
+            1 => $this->getSenderEmail(),
+            2 => Mage::getStoreConfig(self::XML_PATH_SENDING_RETURN_PATH_EMAIL),
+            default => null,
+        };
 
         // Use the queue IFF it's not bypassed and it's been set.
         if (!$_helper->isQueueBypassed() &&

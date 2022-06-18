@@ -11,7 +11,7 @@ class Aschroder_SMTPPro_Smtp_TestController extends Mage_Adminhtml_Controller_Ac
 {
 
     // We use the contacts form template as a test template
-    const XML_PATH_TEST_TEMPLATE   = 'contacts/email/email_template';
+    public const XML_PATH_TEST_TEMPLATE   = 'contacts/email/email_template';
 
     /**
      * @todo change this
@@ -35,6 +35,8 @@ class Aschroder_SMTPPro_Smtp_TestController extends Mage_Adminhtml_Controller_Ac
 
     public function indexAction()
     {
+        $errstr = null;
+        $errno = null;
         $_helper = Mage::helper('smtppro');
 
         $_helper->log($_helper->__("Running SMTP Pro Self Test"));

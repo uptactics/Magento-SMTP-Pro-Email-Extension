@@ -12,7 +12,7 @@
 class Aschroder_SMTPPro_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
-    const LOG_FILE = 'aschroder_smtppro.log';
+    public const LOG_FILE = 'aschroder_smtppro.log';
 
     public function getTransport($storeId = null)
     {

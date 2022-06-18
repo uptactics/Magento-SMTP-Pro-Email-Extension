@@ -79,14 +79,13 @@ class Aschroder_SMTPPro_Helper_Mysql4_Install extends Mage_Core_Helper_Abstract
      * Adds an exception problem to the stack of problems that may
      * have occured during installation.
      * Ignores duplicate column name errors; ignore if the msg starts with "SQLSTATE[42S21]: Column already exists"
-     * @param Exception $ex
      */
     public function addInstallProblem(Exception $ex)
     {
-        if (strpos($ex->getMessage (), "SQLSTATE[42S21]: Column already exists") !== false)
+        if (str_contains($ex->getMessage (), "SQLSTATE[42S21]: Column already exists"))
             return $this;
-        if (strpos($ex->getMessage (), "SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP") !== false 
-                && strpos($ex->getMessage (), "check that column/key exists") !== false )
+        if (str_contains($ex->getMessage (), "SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP") 
+                && str_contains($ex->getMessage (), "check that column/key exists") )
             return $this;
         $this->ex_stack [] = $ex;
         return $this;

@@ -57,7 +57,7 @@ class Aschroder_SMTPPro_Model_Email_Queue extends Mage_Core_Model_Email_Queue {
 
                 $mailer = new Zend_Mail('utf-8');
                 foreach ($message->getRecipients() as $recipient) {
-                    list($email, $name, $type) = $recipient;
+                    [$email, $name, $type] = $recipient;
                     switch ($type) {
                         case self::EMAIL_TYPE_BCC:
                             $mailer->addBcc($email, '=?utf-8?B?' . base64_encode($name) . '?=');
@@ -107,7 +107,7 @@ class Aschroder_SMTPPro_Model_Email_Queue extends Mage_Core_Model_Email_Queue {
 
                     // loop each email to fire an after send event
                     foreach ($message->getRecipients() as $recipient) {
-                        list($email, $name, $type) = $recipient;
+                        [$email, $name, $type] = $recipient;
                         Mage::dispatchEvent('aschroder_smtppro_after_send', array(
                             'to' => $email,
                             'template' => "queued email",
