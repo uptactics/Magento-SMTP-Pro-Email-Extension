@@ -5,7 +5,7 @@
   "homepage":"https://github.com/aschroder/Magento-SMTP-Pro-Email-Extension",
   "require": {
     "magento-hackathon/magento-composer-installer": "*",
-    "php": "8.0"
+    "php": ">=8.0"
   }, 
   "authors":[
     {
@@ -27,5 +27,5 @@
       ["app/locale/ru_RU/Aschroder_SMTPPro.csv", "app/locale/ru_RU/Aschroder_SMTPPro.csv"]
     ]
   },
-  "version": "2.2.0"
+  "version": "2.2.1"
 }
